@@ -16,62 +16,34 @@ exports.UserResolver = void 0;
 const graphql_1 = require("@nestjs/graphql");
 const user_service_1 = require("./user.service");
 const user_entity_1 = require("./entities/user.entity");
-const create_user_input_1 = require("./dto/create-user.input");
-const update_user_input_1 = require("./dto/update-user.input");
+const all_user_response_1 = require("./dto/response-dto/all-user-response");
+const option_user_input_1 = require("./dto/request-dto/option-user.input");
 let UserResolver = class UserResolver {
     constructor(userService) {
         this.userService = userService;
     }
-    createUser(createUserInput) {
-        return this.userService.create(createUserInput);
+    allUser(option, id) {
+        return this.userService.getUsers(option);
     }
-    findAll() {
-        return this.userService.findAll();
-    }
-    findOne(id) {
-        return this.userService.findOne(id);
-    }
-    updateUser(updateUserInput) {
-        return this.userService.update(updateUserInput.id, updateUserInput);
-    }
-    removeUser(id) {
-        return this.userService.remove(id);
+    findOneUser(id) {
+        return this.userService.findOneUser(id);
     }
 };
 __decorate([
-    (0, graphql_1.Mutation)(() => user_entity_1.User),
-    __param(0, (0, graphql_1.Args)('createUserInput')),
+    (0, graphql_1.Query)(() => all_user_response_1.AllUserResponse, { name: 'allUser' }),
+    __param(0, (0, graphql_1.Args)('option')),
+    __param(1, (0, graphql_1.Context)('UserId')),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [create_user_input_1.CreateUserInput]),
+    __metadata("design:paramtypes", [option_user_input_1.UserListOption, Object]),
     __metadata("design:returntype", void 0)
-], UserResolver.prototype, "createUser", null);
+], UserResolver.prototype, "allUser", null);
 __decorate([
-    (0, graphql_1.Query)(() => [user_entity_1.User], { name: 'user' }),
+    (0, graphql_1.Query)(() => user_entity_1.User, { name: 'userDetails' }),
+    __param(0, (0, graphql_1.Args)('id', { type: () => String })),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", []),
+    __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", void 0)
-], UserResolver.prototype, "findAll", null);
-__decorate([
-    (0, graphql_1.Query)(() => user_entity_1.User, { name: 'user' }),
-    __param(0, (0, graphql_1.Args)('id', { type: () => graphql_1.Int })),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Number]),
-    __metadata("design:returntype", void 0)
-], UserResolver.prototype, "findOne", null);
-__decorate([
-    (0, graphql_1.Mutation)(() => user_entity_1.User),
-    __param(0, (0, graphql_1.Args)('updateUserInput')),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [update_user_input_1.UpdateUserInput]),
-    __metadata("design:returntype", void 0)
-], UserResolver.prototype, "updateUser", null);
-__decorate([
-    (0, graphql_1.Mutation)(() => user_entity_1.User),
-    __param(0, (0, graphql_1.Args)('id', { type: () => graphql_1.Int })),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Number]),
-    __metadata("design:returntype", void 0)
-], UserResolver.prototype, "removeUser", null);
+], UserResolver.prototype, "findOneUser", null);
 UserResolver = __decorate([
     (0, graphql_1.Resolver)(() => user_entity_1.User),
     __metadata("design:paramtypes", [user_service_1.UserService])

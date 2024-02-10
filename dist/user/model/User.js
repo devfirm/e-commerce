@@ -86,53 +86,9 @@ __decorate([
     __metadata("design:type", String)
 ], User.prototype, "address", void 0);
 __decorate([
-    (0, mongoose_1.Prop)(),
-    __metadata("design:type", String)
-], User.prototype, "designation", void 0);
-__decorate([
-    (0, mongoose_1.Prop)(),
-    __metadata("design:type", Number)
-], User.prototype, "yearsOfExperience", void 0);
-__decorate([
-    (0, mongoose_1.Prop)(),
-    __metadata("design:type", String)
-], User.prototype, "specialization", void 0);
-__decorate([
-    (0, mongoose_1.Prop)({ default: 'employee', enum: ['employee', 'admin', 'manager'] }),
+    (0, mongoose_1.Prop)({ default: 'customer', enum: ['customer', 'admin', 'manager'] }),
     __metadata("design:type", String)
 ], User.prototype, "userType", void 0);
-__decorate([
-    (0, mongoose_1.Prop)(),
-    __metadata("design:type", String)
-], User.prototype, "dateOfBirth", void 0);
-__decorate([
-    (0, mongoose_1.Prop)({ type: {
-            status: { type: Boolean },
-            officeInTime: { type: Date },
-            officeOutTime: { type: Date }
-        }, default: {
-            status: false,
-            officeInTime: null,
-            officeOutTime: null
-        } }),
-    __metadata("design:type", Object)
-], User.prototype, "attendance", void 0);
-__decorate([
-    (0, mongoose_1.Prop)({ type: {
-            qualification: { type: String },
-            instituteName: { type: String },
-            passingYear: { type: String },
-        } }),
-    __metadata("design:type", Array)
-], User.prototype, "education", void 0);
-__decorate([
-    (0, mongoose_1.Prop)(),
-    __metadata("design:type", Array)
-], User.prototype, "skills", void 0);
-__decorate([
-    (0, mongoose_1.Prop)(),
-    __metadata("design:type", Number)
-], User.prototype, "nidNumber", void 0);
 User = __decorate([
     (0, mongoose_1.Schema)({
         timestamps: true,

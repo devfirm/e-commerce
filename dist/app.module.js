@@ -17,6 +17,10 @@ const user_module_1 = require("./user/user.module");
 const apollo_1 = require("@nestjs/apollo");
 const graphql_1 = require("@nestjs/graphql");
 const path_1 = require("path");
+const core_1 = require("@nestjs/core");
+const guards_1 = require("./common/guards");
+const auth_module_1 = require("./auth/auth.module");
+const database_module_1 = require("./database.module");
 let AppModule = class AppModule {
 };
 AppModule = __decorate([
@@ -46,10 +50,19 @@ AppModule = __decorate([
                 },
                 context: ({ req, res }) => ({ req, res })
             }),
+            database_module_1.DatabaseModule,
+            auth_module_1.AuthModule,
             user_module_1.UserModule,
         ],
         controllers: [app_controller_1.AppController],
-        providers: [app_service_1.AppService],
+        providers: [
+            app_service_1.AppService,
+            {
+                provide: core_1.APP_GUARD,
+                useClass: guards_1.AccessTokenGuard,
+            },
+            guards_1.AccessTokenGuard
+        ],
     })
 ], AppModule);
 exports.AppModule = AppModule;

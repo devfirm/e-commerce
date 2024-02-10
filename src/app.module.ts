@@ -8,6 +8,10 @@ import { UserModule } from './user/user.module';
 import { ApolloDriverConfig, ApolloDriver } from '@nestjs/apollo';
 import { GraphQLModule } from '@nestjs/graphql';
 import { join } from 'path';
+import { APP_GUARD } from '@nestjs/core';
+import { AccessTokenGuard } from './common/guards';
+import { AuthModule } from './auth/auth.module';
+import { DatabaseModule } from './database.module';
 
 @Module({
   imports: [
@@ -36,10 +40,20 @@ import { join } from 'path';
       },
       context: ({ req, res }) => ({ req, res })
     }),
+    DatabaseModule,
+    AuthModule,
     UserModule,
 
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [
+    AppService,
+    {
+      provide: APP_GUARD,
+      useClass: AccessTokenGuard,
+    },
+    AccessTokenGuard
+    // ,SocketGateway
+  ],
 })
 export class AppModule {}

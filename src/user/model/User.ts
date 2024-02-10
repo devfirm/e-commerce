@@ -79,57 +79,8 @@ export class User extends Document {
   @Prop()
   address: string;
 
-  @Prop()
-  designation: string;
-
-  // @Prop({ type: MongooseSchema.Types.ObjectId, ref: 'Setting', required : true})
-  // settingId: string;
-
-  @Prop()
-  yearsOfExperience: number;
-
-  @Prop()
-  specialization: string;
-
-  @Prop({default : 'employee',enum: ['employee', 'admin', 'manager']})
+  @Prop({default : 'customer',enum: ['customer', 'admin', 'manager']})
   userType: string;
-
-  @Prop()
-  dateOfBirth?: string;
-  
-  // new
-  @Prop({type:{
-    status:{type:Boolean},
-    officeInTime: {type:Date},
-    officeOutTime: {type:Date}
-  },default:{
-    status:false,
-    officeInTime: null,
-    officeOutTime: null
-  }})
-  attendance:{
-    status: boolean;
-    officeInTime: Date;
-    officeOutTime:Date
-  }
-  @Prop({type:{
-    
-    qualification:{type:String},
-    instituteName:{type:String},
-    passingYear:{type:String},
-  }})
-  education:[{
-    qualification:string;
-    instituteName:string;
-    passingYear:string;
-  }]
-
-  @Prop()
-  skills:[string]
-
-  @Prop()
-  nidNumber:number;
-
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);

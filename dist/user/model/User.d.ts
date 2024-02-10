@@ -43,25 +43,7 @@ export declare class User extends Document {
     state: string;
     city: string;
     address: string;
-    designation: string;
-    yearsOfExperience: number;
-    specialization: string;
     userType: string;
-    dateOfBirth?: string;
-    attendance: {
-        status: boolean;
-        officeInTime: Date;
-        officeOutTime: Date;
-    };
-    education: [
-        {
-            qualification: string;
-            instituteName: string;
-            passingYear: string;
-        }
-    ];
-    skills: [string];
-    nidNumber: number;
 }
 export declare const UserSchema: MongooseSchema<User, import("mongoose").Model<User, any, any, any, Document<unknown, any, User> & User & {
     _id: Types.ObjectId;
